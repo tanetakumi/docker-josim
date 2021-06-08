@@ -9,6 +9,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 # ENV HOME /home/${USER}
 ENV SHELL /bin/bash
 
+WORKDIR /app
+
+ADD . /app
+
 RUN apt-get update && apt-get -y upgrade
 
 RUN apt-get -y install build-essential
@@ -23,6 +27,7 @@ RUN apt -y install git\
     && apt -y install x11-apps\
     && apt-get -y install python3-tk
 
+RUN pip install -r app/requirements.txt
 
 # set -ex コマンドの実行に失敗したらその場で終了する
 RUN set -ex\ 
@@ -38,7 +43,6 @@ RUN set -ex\
     \
     && cp JoSIM/scripts/josim-plot /usr/local/bin\
     && chmod 755 /usr/local/bin/josim-plot\
-    && sed -i -e "1d" josim-plot\
-    && sed -i -e "1i #! /bin/python3"
+    && sed -i -e "1d" /usr/local/bin/josim-plot\
+    && sed -i -e "1i #! /bin/python3" /usr/local/bin/josim-plot
 
-RUN pip install -r requirements.txt
