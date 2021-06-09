@@ -9,9 +9,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 # ENV HOME /home/${USER}
 ENV SHELL /bin/bash
 
-WORKDIR /app
+WORKDIR /code
 
-ADD . /app
+ADD requirements.txt /code
 
 RUN apt-get update && apt-get -y upgrade
 
@@ -27,7 +27,7 @@ RUN apt -y install git\
     && apt -y install x11-apps\
     && apt-get -y install python3-tk
 
-RUN pip install -r app/requirements.txt
+RUN pip install -r requirements.txt
 
 # set -ex コマンドの実行に失敗したらその場で終了する
 RUN set -ex\ 
