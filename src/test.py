@@ -1,5 +1,6 @@
 from typing import List
 import matplotlib
+from numpy import False_
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import os
@@ -16,11 +17,6 @@ def main(args : List):
             df = pd.read_csv(filepath,index_col=0)
 
             judge_frame(df)
-
-
-            
-
-
 
         else:
             print("ファイルが存在しません。\n指定されたパス:"+filepath)
@@ -42,7 +38,38 @@ def judge_frame(df : pd.DataFrame):
     """
 
     for indexs,items in df_diff.iteritems():
-        items[1]
+        length = len(items)
+
+        # ---------------#
+        # 値の連続状態
+        # 開始index
+        # 合計
+        # ---------------#
+
+        keep = False
+        start_i = 0   
+        sum = 0        
+
+        for i in range(length):
+
+            if keep:
+                if items.iat[i] == 0:
+                    for j in range(start_i,i-1):
+                        items.iat[j] = sum
+
+                    sum = 0
+                    keep = False
+                
+                else:
+                    sum += items.iat[i]
+            
+            else:
+                if items.iat[i] != 0:
+                    keep = True
+                    start_i = i
+                    sum += items.iat[i]
+                
+
         """
         for item in items:
             print(item)
@@ -54,8 +81,8 @@ def judge_frame(df : pd.DataFrame):
             # print(item[1])
 
     
-    # df.plot()
-    # plt.show()
+    df.plot()
+    plt.show()
 
 if __name__ == '__main__':
     main(sys.argv)
