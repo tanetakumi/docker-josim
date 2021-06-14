@@ -1,0 +1,67 @@
+( ( nil
+  version "2.1"
+  mapType "hierarchical"
+  repList "jj_sch schematic_p schematic symbol"
+  stopList "symbol"
+  hierDelim "("
+ )
+( instViewTable
+ )
+( net
+( "net71" "36" )
+( "net19" "39" )
+( "net40" "24" )
+( "net17" "38" )
+( "net48" "18" )
+( "net21" "17" )
+( "net9" "11" )
+( "net6" "46" )
+( "net014" "6" )
+( "net66" "26" )
+( "net14" "37" )
+( "net41" "32" )
+( "net16" "4" )
+( "net58" "20" )
+( "net7" "47" )
+( "clk" "15" )
+( "net73" "34" )
+( "net24" "19" )
+( "net22" "14" )
+( "net4" "42" )
+( "net62" "23" )
+( "net44" "27" )
+( "net36" "25" )
+( "net048" "7" )
+( "net11" "41" )
+( "net32" "22" )
+( "net53" "33" )
+( "net20" "13" )
+( "net37" "31" )
+( "net52" "29" )
+( "net26" "28" )
+( "net09" "3" )
+( "net50" "30" )
+( "net23" "12" )
+( "net1" "43" )
+( "net8" "44" )
+( "net74" "35" )
+( "net13" "8" )
+( "net56" "16" )
+( "net30" "21" )
+( "net15" "9" )
+( "net10" "40" )
+( "net18" "10" )
+( "net5" "45" )
+( "dout" "2" )
+( "din" "1" )
+( "net06" "5" )
+ )
+( inst
+ )
+( model
+ )
+( term
+ )
+( param
+ )
+ )

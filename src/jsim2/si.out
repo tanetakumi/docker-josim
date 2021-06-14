@@ -1,0 +1,165 @@
+**** **** **** **** **** **** **** **** **** **** **** 
+*jsim control file for cadence by kameda@cq.jp.nec.com
+**** **** **** **** **** **** **** **** **** **** ****
+
+*jsim model
+.model jjmod jj(rtype=1, vg=2.8mv, cap=0.218pf, r0=200ohm, rn=17ohm, icrit=0.1ma)
+
+*** netlist file ***
+**** **** **** **** **** **** **** ****+
+*** lib : test_dff2
+*** cell: dff2
+*** view: schematic
+*** jun 11 10:51:19 2021
+**** **** **** **** **** **** **** ****
+
+*** ijtl
+.subckt ijtl          1          2
+***       din      dout
+l1                 1         3   4.776ph fcheck
+l3                 3         2   1.620ph fcheck
+lp1                4         0   0.218ph fcheck
+b1                 3         4  jjmod area=2.13
+rs1                3         4   5.31ohm *shunt=11.30
+.ends
+
+*** jtl
+.subckt jtl          1          2         5
+***       din      dout
+r1                 5         6   8.32ohm
+lpin               1         7   0.840ph fcheck
+lpr1               6         7   3.588ph fcheck
+l2                 8         9   4.776ph fcheck
+l3                 9         2   1.620ph fcheck
+l1                 7         8   2.467ph fcheck
+lp2                4         0   0.218ph fcheck
+lp1               10         0   0.224ph fcheck
+b2                 9         4  jjmod area=2.13
+rs2                9         4   5.31ohm *shunt=11.30
+b1                 8        10  jjmod area=2.13
+rs1                8        10   5.31ohm *shunt=11.30
+.ends
+
+*** sink
+.subckt sink          1        11
+***       din
+r1                11        12   8.32ohm
+r2                13         0   4.02ohm
+lpin               1        14   0.840ph fcheck
+lpr1              12        14   3.588ph fcheck
+l3                10        13   4.792ph fcheck
+l1                14        10   2.475ph fcheck
+lp1                9         0   0.218ph fcheck
+b1                10         9  jjmod area=2.13
+rs1               10         9   5.31ohm *shunt=11.30
+.ends
+
+*** dff
+.subckt dff         15          1          2        36
+***       clk       din      dout
+lp6               16         0   0.216ph fcheck
+lpr1              17        18   0.263ph fcheck
+l3                18        19   6.422ph fcheck
+lp5               20         0   0.203ph fcheck
+l8                21         2   1.979ph fcheck
+l9                19        22   0.044ph fcheck
+lp4               23         0   0.213ph fcheck
+l6                24        25   2.683ph fcheck
+lp3               26         0   0.226ph fcheck
+l2                27        18   1.516ph fcheck
+l1                25        28   3.307ph fcheck
+l4                22        21   4.610ph fcheck
+l7                29        30   2.681ph fcheck
+lpin               1        29   0.842ph fcheck
+lpr3              31        24   3.562ph fcheck
+lpclk             15        24   0.840ph fcheck
+lp2               32         0   0.231ph fcheck
+l5                30        27   4.498ph fcheck
+lpr2              33        29   3.609ph fcheck
+b5                25        20  jjmod area=2.13
+rs5               25        20   5.30ohm *shunt=11.30
+b1                19        28  jjmod area=1.64
+rs1               19        28   6.90ohm *shunt=11.30
+b4                22        23  jjmod area=1.69
+rs4               22        23   6.69ohm *shunt=11.30
+b6                21        16  jjmod area=2.25
+rs6               21        16   5.02ohm *shunt=11.30
+b2                30        32  jjmod area=2.13
+rs2               30        32   5.30ohm *shunt=11.30
+b3                27        26  jjmod area=2.31
+rs3               27        26   4.89ohm *shunt=11.30
+r1                36        17  21.44ohm
+r3                36        31   8.32ohm
+r2                36        33   8.32ohm
+.ends
+
+*** jtlc
+.subckt jtlc          1          2        12
+***       din      dout
+b2                37        38  jjmod area=2.13
+rs2               37        38   5.30ohm *shunt=11.30
+b1                 4        39  jjmod area=2.13
+rs1                4        39   5.30ohm *shunt=11.30
+l3                37         2   1.625ph fcheck
+lpin               1        40   0.842ph fcheck
+lpr1              41        40   3.585ph fcheck
+l2                 4        37   4.784ph fcheck
+l1                40         4   2.460ph fcheck
+lp2               38         0   0.218ph fcheck
+lp1               39         0   0.221ph fcheck
+r1                12        41   8.32ohm
+.ends
+
+*** top cell: dff2
+vb                41         0  pwl(0ps 0mv 20ps 2.5mv)
+x1               ijtl         39         42
+x6               ijtl         43         44
+x3                jtl         37          8         41
+x2                jtl         42         37         41
+x5                jtl         45         46         41
+x11               jtl         10         38         41
+x10               jtl          9         10         41
+x8                jtl         47          4         41
+x7                jtl         44         47         41
+x12              sink         38         41
+x9                dff         46          4          9         41
+x4               jtlc          8         45         41
+v0                39         0  pwl( 0.000ps 0.000mv  50.0ps  0.000mv  51.0ps  1.035mv  52.0ps  1.035mv  53.0ps  0.000mv 150.0ps  0.000mv 151.0ps  1.035mv 152.0ps  1.035mv 153.0ps  0.000mv 300.0ps  0.000mv 301.0ps  1.035mv 302.0ps  1.035mv 303.0ps  0.000mv 450.0ps  0.000mv 451.0ps  1.035mv 452.0ps  1.035mv 453.0ps  0.000mv)
+
+v1                43         0  pwl( 0.000ps 0.000mv 100.0ps  0.000mv 101.0ps  1.035mv 102.0ps  1.035mv 103.0ps  0.000mv 200.0ps  0.000mv 201.0ps  1.035mv 202.0ps  1.035mv 203.0ps  0.000mv 250.0ps  0.000mv 251.0ps  1.035mv 252.0ps  1.035mv 253.0ps  0.000mv 350.0ps  0.000mv 351.0ps  1.035mv 352.0ps  1.035mv 353.0ps  0.000mv 400.0ps  0.000mv 401.0ps  1.035mv 402.0ps  1.035mv 403.0ps  0.000mv)
+
+
+*** netlist file ***
+
+*** jsim input file ***
+
+*** jsim input file ***
+.tran 0.5ps 500ps 0ps 0.2ps
+.file OUT
+.print phase B1|X1
+.print phase B1|X2
+.print phase B2|X2
+.print phase B1|X3
+.print phase B2|X3
+.print phase B1|X4
+.print phase B2|X4
+.print phase B1|X5
+.print phase B2|X5
+.print phase B5|X9
+.print phase B1|X9
+
+.print phase B1|X6
+.print phase B1|X7
+.print phase B2|X7
+.print phase B1|X8
+.print phase B2|X8
+.print phase B2|X9
+.print phase B3|X9
+
+.print phase B4|X9
+.print phase B6|X9
+.print phase B1|X10
+.print phase B2|X10
+.print phase B1|X11
+.print phase B2|X11
+.print phase B1|X12

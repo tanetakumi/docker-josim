@@ -1,0 +1,47 @@
+Virtuoso Framework License (111) was checked out successfully. Total checkout time was 0.17s.
+Generating a normal Jsim net list...
+
+Running simulation in directory: "/home/tanetakumi/work/oa/test_dff2/dff2/jsim".
+
+
+Running netlist
+Begin netlisting Jun 11 10:51:19 2021
+function changeCaseForMonte redefined
+function lowerCasep redefined
+function checkInstName redefined
+function getDeviceName redefined
+function sourceName redefined
+function pulseSource redefined
+function pieceWiseLinearSource redefined
+function impulseSource redefined
+function pulse01Source redefined
+function makeScopePropVal redefined
+"IcRs"
+"IcRs"
+"IcRs"
+"IcRs"
+"IcRs"
+"IcRs"
+"IcRs"
+"IcRs"
+"IcRs"
+"IcRs"
+"IcRs"
+"IcRs"
+End netlisting Jun 11 10:51:19 2021
+Running netlitLmeter()...
+Running netlitConversion()...
+
+Running simin
+
+Running runSim()...
+
+
+Running runsim with simulator: "jsim"
+Begin simulation:    Jun 11 10:51:20 2021
+End simulation:      Jun 11 10:51:20 2021
+
+Running simout
+
+
+Simulation completed successfully.

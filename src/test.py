@@ -1,36 +1,61 @@
+from typing import List
 import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import os
-
+import sys
 import pandas as pd
 
 
-def main():
+def main(args : List):
     curdir = os.path.dirname(os.path.abspath(__file__))
 
-    df = pd.read_csv(curdir+"/out.csv",index_col=0)
+    if len(args) == 2:
+        filepath = curdir+"/"+args[1]
+        if os.path.exists(filepath):
+            df = pd.read_csv(filepath,index_col=0)
 
-    print(df)
-    '''
-    x_list=[] # x_listを定義 (空のリストを作成)
-    y_list=[] # y_listを定義 
-    ##  データを読み込み，x_listとy_listに値を格納する
-    for line in f:
-        data = line[:-1].split(' ')
-        x_list.append(float(data[0]))
-        y_list.append(float(data[1]))
-    print(x_list)
-    print("-------------")
-    print(y_list)
-    plt.plot(x_list,y_list)
-    # plt.plot([1, 3, 3, 4, 5])
-    plt.show()
-    '''
-    df.plot()
-    plt.show()
+            judge_frame(df)
+
+
+            
+
+
+
+        else:
+            print("ファイルが存在しません。\n指定されたパス:"+filepath)
+    else:
+        print("引数が足りません。\n入力された引数:"+str(len(args)))
+
+
+
+def judge_frame(df : pd.DataFrame):
+    df_diff = df.diff()
+    df_diff.where(df_diff >= 0, other = 0, inplace = True)
+    # df.where(df == 0, other = 1, inplace = True)
+    # print(df)
+    # print(len(df.columns))
+    """
+    for colum in df_diff.columns:
+        for value in df_diff[colum]:
+            print(value)
+    """
+
+    for indexs,items in df_diff.iteritems():
+        items[1]
+        """
+        for item in items:
+            print(item)
+            print(type(item))
+        """
+            
+            
+
+            # print(item[1])
+
+    
+    # df.plot()
+    # plt.show()
 
 if __name__ == '__main__':
-    # cmd = ("jsim si.inp")
-    # print(res_cmd_lfeed(cmd))
-    main()
+    main(sys.argv)

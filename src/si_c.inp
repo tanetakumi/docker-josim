@@ -136,31 +136,31 @@ X4               jtlc          8         45         41
 * .tran <記録幅> <終了時間> <開始時間> <シミュレーション間隔>
 .tran 0.5p 500p 0p 0.2p
 
-.print phase B1|X1
-.print phase B1|X2
-.print phase B2|X2
-.print phase B1|X3
-.print phase B2|X3
-.print phase B1|X4
-.print phase B2|X4
-.print phase B1|X5
-.print phase B2|X5
-.print phase B5|X9
-.print phase B1|X9
+.print devi B1|X1
+.print devi B1|X2
+.print devi B2|X2
+.print devi B1|X3
+.print devi B2|X3
+.print devi B1|X4
+.print devi B2|X4
+.print devi B1|X5
+.print devi B2|X5
+.print devi B5|X9
+.print devi B1|X9
 
-.print phase B1|X6
-.print phase B1|X7
-.print phase B2|X7
-.print phase B1|X8
-.print phase B2|X8
-.print phase B2|X9
-.print phase B3|X9
+.print devi B1|X6
+.print devi B1|X7
+.print devi B2|X7
+.print devi B1|X8
+.print devi B2|X8
+.print devi B2|X9
+.print devi B3|X9
 
-.print phase B4|X9
-.print phase B6|X9
-.print phase B1|X10
-.print phase B2|X10
-.print phase B1|X11
-.print phase B2|X11
-.print phase B1|X12
+.print devi B4|X9
+.print devi B6|X9
+.print devi B1|X10
+.print devi B2|X10
+.print devi B1|X11
+.print devi B2|X11
+.print devi B1|X12
 .end 
