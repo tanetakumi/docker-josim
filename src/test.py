@@ -75,11 +75,6 @@ def judge_frame(df : pd.DataFrame):
             print(item)
             print(type(item))
         """
-            
-            
-
-            # print(item[1])
-
     
     df.plot()
     plt.show()
