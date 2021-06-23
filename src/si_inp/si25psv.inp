@@ -3,14 +3,14 @@
 **** **** **** **** **** **** **** **** **** **** ****
 
 *JSIM model
-.model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.218pF, R0=200ohm, Rn=17ohm, Icrit=0.1mA)
+.model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.218pF, R0=200ohm, Rn=17ohm, Icrit=0.08mA)
 
 *** netlist file ***
 **** **** **** **** **** **** **** ****+
 *** Lib : test_dff2
 *** Cell: dff2
 *** View: schematic
-*** Jun 11 14:49:48 2021
+*** Jun 11 14:57:51 2021
 **** **** **** **** **** **** **** ****
 
 *** ijtl
@@ -124,9 +124,9 @@ X7                jtl         44         47         41
 X12              sink         38         41
 X9                dff         46          4          9         41
 X4               jtlc          8         45         41
-V0                39         0  PWL( 0.000ps 0.000mV  10.0ps  0.000mV  11.0ps  1.035mV  12.0ps  1.035mV  13.0ps  0.000mV  30.0ps  0.000mV  31.0ps  1.035mV  32.0ps  1.035mV  33.0ps  0.000mV  50.0ps  0.000mV  51.0ps  1.035mV  52.0ps  1.035mV  53.0ps  0.000mV  70.0ps  0.000mV  71.0ps  1.035mV  72.0ps  1.035mV  73.0ps  0.000mV  90.0ps  0.000mV  91.0ps  1.035mV  92.0ps  1.035mV  93.0ps  0.000mV)
+V0                39         0  PWL( 0.000ps 0.000mV  25.0ps  0.000mV  26.0ps  1.035mV  27.0ps  1.035mV  28.0ps  0.000mV  75.0ps  0.000mV  76.0ps  1.035mV  77.0ps  1.035mV  78.0ps  0.000mV 125.0ps  0.000mV 126.0ps  1.035mV 127.0ps  1.035mV 128.0ps  0.000mV 175.0ps  0.000mV 176.0ps  1.035mV 177.0ps  1.035mV 178.0ps  0.000mV 225.0ps  0.000mV 226.0ps  1.035mV 227.0ps  1.035mV 228.0ps  0.000mV)
 
-V1                43         0  PWL( 0.000ps 0.000mV  20.0ps  0.000mV  21.0ps  1.035mV  22.0ps  1.035mV  23.0ps  0.000mV  40.0ps  0.000mV  41.0ps  1.035mV  42.0ps  1.035mV  43.0ps  0.000mV  60.0ps  0.000mV  61.0ps  1.035mV  62.0ps  1.035mV  63.0ps  0.000mV  80.0ps  0.000mV  81.0ps  1.035mV  82.0ps  1.035mV  83.0ps  0.000mV)
+V1                43         0  PWL( 0.000ps 0.000mV  50.0ps  0.000mV  51.0ps  1.035mV  52.0ps  1.035mV  53.0ps  0.000mV 100.0ps  0.000mV 101.0ps  1.035mV 102.0ps  1.035mV 103.0ps  0.000mV 150.0ps  0.000mV 151.0ps  1.035mV 152.0ps  1.035mV 153.0ps  0.000mV 200.0ps  0.000mV 201.0ps  1.035mV 202.0ps  1.035mV 203.0ps  0.000mV)
 
 
 *** netlist file ***
@@ -135,24 +135,25 @@ V1                43         0  PWL( 0.000ps 0.000mV  20.0ps  0.000mV  21.0ps  1
 
 *** jsim input file ***
 .tran 0.5p 500p 0p 0.2p
+.print devv B1|X1
 
-.print phase B1|X1
+.print devv B1|X5
 
-.print phase B1|X5
+.print devv B5|X9
+.print devv B1|X9
 
-.print phase B5|X9
-.print phase B1|X9
-
-.print phase B1|X6
+.print devv B1|X6
 
 
-.print phase B1|X8
+.print devv B1|X8
 
-.print phase B2|X9
-.print phase B3|X9
+.print devv B2|X9
+.print devv B3|X9
 
-.print phase B4|X9
-.print phase B6|X9
+.print devv B4|X9
+.print devv B6|X9
 
-.print phase B1|X12
+.print devv B1|X12
+.temp 4.2
+.neb 500000000
 .end

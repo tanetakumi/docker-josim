@@ -1,0 +1,241 @@
+.model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.064pF, R0=100ohm, Rn=16ohm, Icrit=0.1mA)
+.model pijjmod jj(Rtype=1, Vg=2.8mV, Cap=0.064pF, R0=100ohm, Rn=16ohm, Icrit=0.1mA)
+
+**subckt
+***HFQ SQUID***
+.subckt psquid    1
+P0                 2        3  jjmod area=20
+Lp0                1        2   0.001pH
+L11                3        4   1.528pH fcheck
+B1                 4        5  jjmod area=0.49
+Rs1               4        5   15.73ohm *15.73
+Lp1                5        0   0.221pH fcheck
+L2                 1        6   1.529pH fcheck 
+B2                 6        7  jjmod area=0.49
+Rs2               6        7   15.73ohm *15.73
+LP2                7        0   0.221pH fcheck
+.ends
+
+***HFQ SQUID***
+.subckt psquid2    1
+P0                 2        3  jjmod area=20
+Lp0                1        2   0.001pH
+L11                3        4   1.528pH fcheck
+B1                 4        5  jjmod area=0.74
+Rs1               4        5   10.5ohm *10.5
+Lp1                5        0   0.221pH fcheck
+L2                 1        6   1.529pH fcheck
+B2                 6        7  jjmod area=0.74
+Rs2               6        7   10.5ohm *10.5
+LP2                7        0   0.221pH fcheck
+.ends
+
+***HFQ SQUID***
+.subckt psquid3    1
+P0                 2        3  jjmod area=20
+Lp0                1        2   0.001pH
+L11                3        4   1.528pH fcheck
+B1                 4        5  jjmod area=1.00
+Rs1               4        5   7.8ohm *7.8
+Lp1                5        0   0.221pH fcheck
+L2                 1        6   1.529pH fcheck
+B2                 6        7  jjmod area=1.00
+Rs2               6        7   7.8ohm *7.8
+LP2                7        0   0.221pH fcheck
+.ends
+
+***HFQ SQUID***
+.subckt psquid4    1
+P0                 2        3  jjmod area=20
+Lp0                1        2   0.001pH
+L11                3        4   1.528pH fcheck
+B1                 4        5  jjmod area=1.49
+Rs1               4        5   5.23ohm *5.23
+Lp1                5        0   0.221pH fcheck
+L2                 1        6   1.529pH fcheck
+B2                 6        7  jjmod area=1.49
+Rs2               6        7   5.23ohm *5.23
+LP2                7        0   0.221pH fcheck
+.ends
+
+***HFQ SQUID***
+.subckt psquid5    1
+P0                 2        3  jjmod area=20
+Lp0                1        2   0.001pH
+L11                3        4   1.528pH fcheck
+B1                 4        5  jjmod area=2.13
+Rs1               4        5   3.65ohm *3.65
+Lp1                5        0   0.221pH fcheck
+L2                 1        6   1.529pH fcheck
+B2                 6        7  jjmod area=2.13
+Rs2               6        7   3.65ohm *3.65
+LP2                7        0   0.221pH fcheck
+.ends
+
+
+***SFQ***
+.subckt jtlin  1  4
+L0                 1         2   4.776pH
+B0                 2         3  jjmod area=2.13
+RS0                2         3   5.31ohm
+LP0                3         0   0.218pH
+L1                 2         4   1.62pH
+.ends
+
+***SFQ***
+.subckt jtl  3 7 1
+R1                 1         2   8.32ohm
+LPIN               3         4   0.840pH fcheck
+LPR1               2         4   3.588pH fcheck
+L2                 5         6   4.776pH fcheck
+L3                 6         7   1.620pH fcheck
+L1                 4         5   2.467pH fcheck
+LP2                8         0   0.218pH fcheck
+LP1                9         0   0.224pH fcheck
+B2                 6         8  jjmod area=2.13
+RS2                6         8   5.31ohm *SHUNT=11.30
+B1                 5         9  jjmod area=2.13
+RS1                5         9   5.31ohm *SHUNT=11.30
+.ends
+
+***SFQ***
+.subckt jtlout1  3 5 1
+R1                 1         2   8.32ohm
+LPIN               3         4   0.840pH fcheck
+LPR1               2         4   3.588pH fcheck
+L1                 4         5   2.467pH fcheck
+LP1                9         0   0.224pH fcheck
+B1                 5         9  jjmod area=2.13
+RS1                5         9   5.31ohm *SHUNT=11.30
+.ends
+
+***SFQ***
+.subckt jtlout2  3 5 1
+R1                 1         2   35.7ohm
+LPIN               3         4   10pH fcheck
+LPR1               2         4   3.588pH fcheck
+L1                 4         5   10pH fcheck
+LP1                9         0   0.224pH fcheck
+B1                 4         9  jjmod area=1.00
+RS1                4         9   11.30ohm *SHUNT=11.30
+.ends
+
+***SFQ***
+.subckt jtlout3  3 1
+R1                 1         2   8.32ohm
+LPIN               3         4   0.840pH fcheck
+LPR1               2         4   3.588pH fcheck
+L1                 4         5   2.467pH fcheck
+LP1                9         0   0.224pH fcheck
+B1                 5         9  jjmod area=2.13
+RS1                5         9   5.31ohm *SHUNT=11.30
+.ends
+
+***bias to 2HFQ SQUID***
+.subckt HFQbias 1 3
+L0                 1         2  20pH 
+Rbias              2         4  20ohm
+Vbias              4         0 PWL(0ps 0mV 50ps 0mV 100ps 0.325mV)
+L1                 2         3  20pH *1.16pH
+.ends
+
+***increase Ic of HFQ***
+R10               23      4000 17.5ohm *16.3
+R20               24      4000  10ohm *9.3
+R30               25      4000  4.8ohm *4.5
+R40               26      4000  2.7ohm *2.5
+VbiasHFQ        4000         0 PWL(0ps 0mV 50ps 0mV 100ps 0.46mV) 
+
+***SFQ bias***
+Vbias1 1000 0 PWL(0ps 0.0mV 50ps 2.5mV)
+Vbias2 2000 0 PWL(0ps 0.0mV 50ps 2.5mV)
+Vbias3 3000 0 PWL(0ps 0.0mV 50ps 2.5mV)
+
+
+***hfq to sfq***
+.subckt hfqsfq  1 2000 3000 4
+R1                 2000       3   40ohm *40ohm
+L1                 1         2   2.475pH fcheck *2.475
+LPR1               3         2   1.505pH fcheck
+LP1                5         0   0.434pH fcheck
+B1                 2         5  jjmod area=0.49
+RS1                2         5   23.10ohm *SHUNT=11.30
+L3                 2         4   10.049pH fcheck
+R2                 3000       6   30ohm *30ohm
+LPR2               6         4   2.278pH fcheck
+LP2                7         0   0.445pH fcheck
+B2                 4         7  jjmod area=1.0
+RS2                4         7   11.30ohm *SHUNT=11.30
+.ends
+
+**main
+Vin 1 0 PWL(0ps 0mV 200ps 0mV 201ps 1.034mV 202ps 1.034mV 203ps 0mV 600ps 0mV 601ps 1.034mV 602ps 1.034mV 603ps 0mV 1000ps 0mV 1001ps 1.034mV 1002ps 1.034mV 1003ps 0mV 1400ps 0mV 1401ps 1.034mV 1402ps 1.034mV 1403ps 0mV)
+*Vin       1  0  PULSE(0mv 1.034mV 200ps 1ps 1ps 1ps 400ps)
+
+
+X0 jtlin 1 2
+X1 jtl 2 3 1000
+X2 jtlout1 3 4 1000
+X3 jtlout2 4 5 1000
+RSH  5 6 3ohm
+L0 6 7 20pH
+X4 psquid 7 
+X5 HFQbias 7 8
+X6 psquid 8
+L1 8 9 40pH
+X7 psquid 9
+X8 HFQbias 9 10
+X9 psquid 10
+L2 10 11 40pH
+X10 psquid 11
+X11 HFQbias 11 12
+X12 psquid 12
+L3 12 13 40pH
+X13 psquid 13
+X14 HFQbias 13 14
+X15 psquid 14
+L4 14 15 40pH
+X16 psquid 15 
+X17 HFQbias 15 16
+X18 psquid 16
+L5 16 17 40pH
+X19 psquid 17
+X20 HFQbias 17 18
+X21 psquid 18
+L6 18 19 40pH
+X22 psquid 19
+X23 HFQbias 19 20
+X24 psquid 20
+L7 20 21 40pH
+X25 psquid 21
+X26 HFQbias 21 22
+X27 psquid 22
+
+L8 22 23 18pH *18pH
+X28 psquid2 23
+
+L9 23 24 10pH *10pH
+X29 psquid3 24
+
+L10 24 25 5pH *5pH
+X30 psquid4 25
+
+L11 25 26 2.8pH *2.8pH
+X31 psquid5 26
+
+L12 26 27 10pH
+RHS 27 28 1ohm
+X32 hfqsfq 28 2000 3000 29
+X33 jtlin 29 30
+X34 jtl 30 31 1000
+X35 jtlout3 31 1000
+
+
+*** jsim input file ***
+.tran 0.1p 4000p 50p 0p 0.2p
+.print phase B1|X3
+.print devv B1|X3
+.print phase B1|X4
+.print phase B2|X4
+.print devv B1|X4
+.end

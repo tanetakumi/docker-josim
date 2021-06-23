@@ -135,7 +135,6 @@ V1                43         0  PWL( 0.000ps 0.000mV  50.0ps  0.000mV  51.0ps  1
 
 *** jsim input file ***
 .tran 0.5p 500p 0p 0.2p
-
 .print phase B1|X1
 
 .print phase B1|X5
@@ -155,4 +154,6 @@ V1                43         0  PWL( 0.000ps 0.000mV  50.0ps  0.000mV  51.0ps  1
 .print phase B6|X9
 
 .print phase B1|X12
-.end 
+.temp 4.2
+.neb 50
+.end
