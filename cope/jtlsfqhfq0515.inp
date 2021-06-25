@@ -1,5 +1,5 @@
 .model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.064pF, R0=100ohm, Rn=16ohm, Icrit=0.1mA)
-.model pijjmod jj(Rtype=1, Vg=2.8mV, Cap=0.064pF, R0=100ohm, Rn=16ohm, Icrit=0.1mA, PHI=3.14159)
+
 
 **subckt
 ***HFQ SQUID***
@@ -232,96 +232,8 @@ X35 jtlout3 31 1000
 
 
 **netlis file
-.tran 0.1ps 4000ps 50ps 
-.file JTL
+.tran 0.5ps 400ps 50ps 
+*.file JTL
 .print phase X3_B1
-.print devv X3_B1
 .print phase X4_B1
-.print phase X4_B2 *5
-.print devv X4_B1
-.print devv X4_B2
-.print phase X6_B1
-.print phase X6_B2
-.print devv X6_B1 *10
-.print devv X6_B2
-.print phase X7_B1
-.print phase X7_B2
-.print devv X7_B1
-.print devv X7_B2 *15
-.print phase X9_B1
-.print phase X9_B2
-.print devv X9_B1
-.print devv X9_B2
-.print phase X10_B1 *20
-.print phase X10_B2
-.print devv X10_B1
-.print devv X10_B2
-.print phase X12_B1
-.print phase X12_B2 *25
-.print devv X12_B1
-.print devv X12_B2
-.print phase X13_B1
-.print phase X13_B2
-.print devv X13_B1 *30
-.print devv X13_B2
-.print phase X15_B1
-.print phase X15_B2
-.print devv X15_B1
-.print devv X15_B2 *35
-.print phase X16_B1
-.print phase X16_B2
-.print devv X16_B1
-.print devv X16_B2
-.print phase X18_B1 *40
-.print phase X18_B2
-.print devv X18_B1
-.print devv X18_B2
-.print phase X19_B1
-.print phase X19_B2 *45
-.print devv X19_B1
-.print devv X19_B2
-.print phase X21_B1
-.print phase X21_B2
-.print devv X21_B1 *50
-.print devv X21_B2
-.print phase X22_B1
-.print phase X22_B2
-.print devv X22_B1
-.print devv X22_B2 *55
-.print phase X24_B1
-.print phase X24_B2
-.print devv X24_B1
-.print devv X24_B2
-.print phase X25_B1 *60
-.print phase X25_B2
-.print devv X25_B1
-.print devv X25_B2
-.print phase X27_B1
-.print phase X27_B2 *65
-.print devv X27_B1
-.print devv X27_B2
-.print phase X28_B1
-.print phase X28_B2
-.print devv X28_B1 *70
-.print devv X28_B2
-.print phase X29_B1
-.print phase X29_B2
-.print devv X29_B1
-.print devv X29_B2 *75
-.print phase X30_B1
-.print phase X30_B2
-.print devv X30_B1
-.print devv X30_B2
-.print phase X31_B1 *80
-.print phase X31_B2 
-.print devv X31_B1
-.print devv X31_B2
-.print phase X32_B1 *converter49
-.print phase X32_B2 *85 *converter100
-.print devv X32_B1
-.print devv X32_B2
-.print phase X33_B0 *converter213
-.print devv X33_B0
-.print phase X35_B1 *90
-.print devv X35_B1
-.print devi X35_B1
+.print phase X4_B2
