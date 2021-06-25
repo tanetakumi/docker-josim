@@ -40,7 +40,6 @@ def judge_frame(df : pd.DataFrame) -> pd.DataFrame:
                         else:
                             items.iat[j] = 0
                         
-
                     sum = 0
                     keep = False
                 
