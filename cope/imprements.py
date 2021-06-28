@@ -10,7 +10,7 @@ def simulation(filepath) -> str:
     # result = subprocess.check_output(["pjsim_n",filepath])
     # result = subprocess.check_output(["pjsim_n", filepath])
     result = subprocess.run(["pjsim_n", filepath], stdout=PIPE, stderr=PIPE, text=True)
-    print(type(result.stdout))
+    # print(type(result.stdout))
     return result.stdout
     # result = subprocess.call(["pjsim_n", filepath])
     # result = subprocess.check_output("pjsim_n "+filepath,shell=True)

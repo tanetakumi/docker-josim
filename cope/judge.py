@@ -24,7 +24,7 @@ def judge_frame(df : pd.DataFrame) -> pd.DataFrame:
                     max_tmp = 0
                     max_index = 0
                     for j in range(start_i,i-1):
-                        if sum >3.14:
+                        if sum >2:
 
                             
                             if max_tmp < items.iat[j]:
