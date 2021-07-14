@@ -3,24 +3,20 @@
 
 .subckt psquid        3  5 
 L1                 3         1   1.75pH fcheck
-L2                 3         4   1.75pH fcheck
+L2                 3         2   1.75pH fcheck
 B1                 1         5  jjmod area=0.49
 R1                 1         5   15.88ohm
-B2                 2         5  jjmod area=0.49
+P2                 2         5  jjmod area=0.49
 R2                 2         5   15.88ohm
-P2                 4         2  jjmod area=20
-R3                 4         2   0.2ohm
 .ends
 
 .subckt psquid2        3  5 
 L1                 3         1   1.75pH fcheck
-L2                 3         4   1.75pH fcheck
+L2                 3         2   1.75pH fcheck
 B1                 1         5  jjmod area=0.55
 R1                 1         5   14.2ohm
-B2                 2         5  jjmod area=0.55
+P2                 2         5  jjmod area=0.55
 R2                 2         5   14.2ohm
-P2                 4         2  jjmod area=20
-R3                 4         2   0.2ohm
 .ends
 
 .subckt HFQ_bias         1  3  4
@@ -40,7 +36,7 @@ L2               2        3   20pH fcheck
 Vin               1        0   Pulse(0mV,25mV,400ps,10ps,10ps,100ps,400ps)
 Rin               1        20   1050ohm
 L01                20        2   2pH fcheck
-L0                2        0   42pH fcheck
+L0                2        0   40pH fcheck
 L1                2        21   2pH fcheck
 
 X1       psquid    21        22
@@ -79,7 +75,7 @@ X12      HFQ_bias1    3  4  100
 X13      HFQ_bias    4  5  100
 X14      HFQ_bias1    5  6  100
 
-Vb                100         0 pwl(0ps 0mV 100ps 3.1mV)
+Vb                100         0 pwl(0ps 0mV 100ps 2.5mV)
 *** netlist file ***
 
 *** jsim input file ***
@@ -87,20 +83,19 @@ Vb                100         0 pwl(0ps 0mV 100ps 3.1mV)
 
 *.file OUT
 
+*.print phase  X0_X1_B1
+*.print phase  X0_X1_P2
 
-.print phase  X0_X1_B1
-.print phase  X0_X1_B2
-
-.print phase  X0_X2_B1
-.print phase  X0_X2_B2
+*.print phase  X0_X2_B1
+*.print phase  X0_X2_P2
 
 .print phase  X0_X3_B1
-.print phase  X0_X3_B2
+.print phase  X0_X3_P2
 
-.print phase  X0_X4_B1
-.print phase  X0_X4_B2
+*.print phase  X0_X4_B1
+*.print phase  X0_X4_P2
 
-.print phase  X0_X5_B1
-.print phase  X0_X5_B2
+*.print phase  X0_X5_B1
+*.print phase  X0_X5_P2
 
 .end

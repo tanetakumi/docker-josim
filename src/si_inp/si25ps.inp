@@ -135,23 +135,7 @@ V1                43         0  PWL( 0.000ps 0.000mV  50.0ps  0.000mV  51.0ps  1
 
 *** jsim input file ***
 .tran 0.5p 500p 0p 0.2p
-.print phase B1|X1
 
-.print phase B1|X5
-
-.print phase B5|X9
-.print phase B1|X9
-
-.print phase B1|X6
-
-
-.print phase B1|X8
-
-.print phase B2|X9
-.print phase B3|X9
-
-.print phase B4|X9
-.print phase B6|X9
 
 .print phase B1|X12
 .temp 4.2
