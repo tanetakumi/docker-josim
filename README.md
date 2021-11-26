@@ -1,22 +1,38 @@
 # docker-josim
 
+This is a container for easy installation of josim and analysis of simulation results in python.
 
-scp command
+This JoSIM is able to recognize pi junctions.
 
-```
-scp -r user@remote-ip:~/work/oa/<dir> .
-```
+[Forked JoSIM (pJoSIM)](https://github.com/tanetakumi/JoSIM)
 
-## pandas  loc, at の違い
+[JoSIM](https://github.com/JoeyDelp/JoSIM)
 
-### __単独の要素__
+## Installation
 
-at は行名と列名
+1.  install Docker.  [Docker](https://www.docker.com/)
 
-iat は行番号と列番号
+2.  Clone this repository or download it as a zip file
+    ```
+    git clone https://github.com/tanetakumi/docker-josim
+    ```
 
-### __複数の要素__
+3.  Build a container from the Dockerfile. (.devcontainer/Dockerfile)
+    
+    For easy installation, you can install "Remote - Containers" from the VScode extension, open the folder where you downloaded this repository, and open it from "Reopen in Container".
 
-loc は行名と列名
+    [Remote - Containers](https://code.visualstudio.com/docs/remote/containers)
 
-iloc は行番号と列番号
+## Command
+
+- if If you have the X11 client installed on your computer, you can easily view the simulation results in a graph by running this command.
+    ```
+    sim-plot <filepath>
+    ```
+
+- Circuit Optimization Commands
+
+    under development
+    ```
+    optimize <filepath> <outputfilepath>
+    ```
