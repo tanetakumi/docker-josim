@@ -49,7 +49,7 @@ else
     echo "opti"
     # 実行処理(確認したい)
     if grep -E ${str} $abspath; then 
-        python ./optimizer.py
+        echo "opti"
     else
         sed -i -e '$a \\n\n*** test ***\nAvalue=\nBvalue=\nCvalue=' ${abspath}
         echo "Optimization variables are not described" >&2

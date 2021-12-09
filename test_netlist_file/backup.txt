@@ -18,7 +18,7 @@ R1                      2       100     50ohm
 L2                      2       3       18pH
 X2        psquid       3       0      
 L3                      3       4       18pH
-R2                      4       100     #(50)ohm
+R2                      4       100     50ohm
 L4                      4       5       18pH
 X3        psquid       5       0       
 
@@ -27,16 +27,10 @@ L5                      6       0       2pH
 Vb                      100     0       pwl(0ps 0mV 100ps 1.0mV)
 
 .tran 0.25p 1000p 0 0.25p
-.print PHASE B1|X2      
-.print PHASE B2|X2          
+.print PHASE B1|X2
+.print PHASE B2|X2
 
 .print PHASE B1|X3
 .print PHASE B2|X3
+
 .end
-
-
-**** optimize ****
-* バイアス電圧の立ち上がり終了の時間
-* EndTimeOfBiasRise=100ps
-* 初期パルスの入力開始時間
-* StartTimeOfPulseInput=200ps

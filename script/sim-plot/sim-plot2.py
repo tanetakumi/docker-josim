@@ -17,9 +17,9 @@ def cut_josim_data(raw : str) -> str:
         print("\033[31m[ERROR] シュミレーションされませんでした。\033[0m")
         sys.exit()
 
-def simulation(filepath : str) -> pd.DataFrame:
+def simulation(filedata : str) -> pd.DataFrame:
 
-    result = subprocess.run(["josim-cli", filepath, "-V", "1"], stdout=PIPE, stderr=PIPE, text=True)
+    result = subprocess.run(["josim-cli", "-i"], input=filedata, stdout=PIPE, stderr=PIPE, text=True)
     print(result.stderr)
     split_data = cut_josim_data(result.stdout)
     return pd.read_csv(io.StringIO(split_data),index_col=0,header=0, sep='\s+')
@@ -29,7 +29,11 @@ if __name__ == '__main__':
     if len(sys.argv) == 2:
         filepath = sys.argv[1]
         if os.path.exists(filepath):
-            df = simulation(filepath)
+            with open(filepath, 'r') as f:
+                raw = f.read()
+            df = simulation(raw)
+            df["ADD"]=df["P(B1|X2)"]+df["P(B2|X2)"]
+            df["P2"]=df["P(B1|X3)"]+df["P(B2|X3)"]
             print(df)
             df.plot()
             plt.show()
