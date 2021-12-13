@@ -4,8 +4,10 @@ import sys
 import pandas as pd
 import math
 import concurrent.futures
+
+from pandas.core.arrays.integer import IntegerArray
 import util
-import simulation
+from simulation import simulation
 import judge
     
 
@@ -54,25 +56,66 @@ def get_value(data : str, key : str) -> str:
             print(key + " の値が取得できません", file=sys.stderr)
             sys.exit(1)
 
-def get_variable(data : str) -> str:
-    line = next(filter(lambda x: re.search('#\(.+\)', x), data.splitlines()),None)
-    print(line)
+# 先頭の文字列、Line
+def get_variable(text : str) -> list:
+    vlist = []
+    for l in re.findall('#.+\(.+\)', text):
+        a = re.split('\(', re.sub('#|\)','',l) )
+        vlist.append({'char': a[0], 'text': l, 'def': util.stringToNum(a[1])})
+    return vlist
+
+
+def sim_default(time_tuple : tuple, sim_data : str, squid : list, vlist : list) -> pd.DataFrame:
+    for v in vlist:
+        sim_data = sim_data.replace(v['text'], '{:.2f}'.format(v['def']))
+    return judge.judge(time_tuple, simulation(sim_data), squid)
+
+def get_margin(time_tuple : tuple, sim_data : str, squid : list, vlist : list, def_frame : pd.DataFrame, char : str) -> pd.DataFrame:
+    
+    for v in vlist:
+        if v['char'] != char:
+            sim_data = sim_data.replace(v['text'], '{:.2f}'.format(v['def']))
+        else:
+            vtarg = v
+    pre_b = True
+    high_v = vtarg['def']
+    low_v = 0
+    for i in range(6):
+        tmp_v = (high_v + low_v)/2
+        sim_data_new = sim_data.replace(vtarg['text'], '{:.2f}'.format(tmp_v))
+        tmp_frame = judge.judge(time_tuple, simulation(sim_data_new), squid)
+        # print(tmp_frame)
+        pre_b = judge.compareDataframe(tmp_frame, def_frame)
+        if pre_b:
+            high_v = tmp_v
+        else:
+            low_v = tmp_v
+
+    return high_v
+
+    # return judge.judge(time_tuple, simulation(sim_data), squid)
 
 def optimize(filepath : str):
     if os.path.exists(filepath):
         # 読み込み
         with open(filepath, 'r') as f:
             raw = f.read()
-        # get end time of bias raise and start time of first pulse
+        # 1.get end time of bias raise and start time of first pulse
         time1, time2, sim_data = get_optimize_data(raw)
+        time_tuple = (100e-12, 300e-12) # time_tuple=(time1, time2)
+        # 2.get squids data
+        squids = get_judge_spuid(sim_data)
 
-        # get squids data
-        squids = get_judge_spuid(raw)
+        # 3.get variable data
+        vlist = get_variable(sim_data)
 
-        # 
+        # simualtion default value
+        def_frame = sim_default(time_tuple, sim_data, squids, vlist)
+        print(def_frame)
 
+        get_margin(time_tuple, sim_data, squids, vlist, def_frame, "R2")
         # simulation
-        print(judge.judge(simulation.simulation(sim_data), squids, (100e-12, 300e-12)))
+        # print(judge.judge(simulation.simulation(sim_data), squids, (100e-12, 300e-12)))
     else:
         print("ファイルが存在しません。\n指定されたパス:"+filepath)
 
@@ -87,5 +130,5 @@ def main():
 if __name__ == '__main__':
     with open('/workspaces/docker-josim/test_netlist_file/backup.txt','r') as f:
         raw = f.read()
-    get_variable(raw)
-    # optimize("/workspaces/docker-josim/test_netlist_file/piJTL.inp")
+    
+    optimize("/workspaces/docker-josim/test_netlist_file/piJTL.inp")

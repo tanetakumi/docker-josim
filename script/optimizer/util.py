@@ -13,7 +13,17 @@ def digit(s):  # 正規表現を使って小数点以下の桁数
         return len(re.split("\.",s)[1])
     else:
         return 0
-    
 
+def stringToNum(s):
+    if isint(s):
+        return int(s)
 
+    elif isfloat(s):
+        d = digit(s)
+        return round(float(s),d)
+
+    else:
+        return None
     
+if __name__ == "__main__":
+    print("hello")
