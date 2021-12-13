@@ -42,6 +42,7 @@ def compareDataframe(df1 : pd.DataFrame, df2 : pd.DataFrame) -> bool:
     return df1.drop('time', axis=1).equals(df2.drop('time', axis=1))
 
 if __name__ == '__main__':
+    """
     with open("/workspaces/docker-josim/test_netlist_file/backup.txt","r") as f:
         raw = f.read()
     
@@ -50,4 +51,4 @@ if __name__ == '__main__':
 
     rs = judge((100e-12, 300e-12),df,[ {'1': 'P(B1|X2)', '2': 'P(B2|X2)'}, {'1': 'P(B1|X3)', '2': 'P(B2|X3)'}])
 
-    print(rs)
+    print(rs)"""

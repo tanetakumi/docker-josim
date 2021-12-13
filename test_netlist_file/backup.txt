@@ -18,7 +18,7 @@ R1                      2       100     50ohm
 L2                      2       3       18pH
 X2        psquid       3       0      
 L3                      3       4       18pH
-R2                      4       100     31.25ohm
+R2                      4       100     50ohm
 L4                      4       5       18pH
 X3        psquid       5       0       
 

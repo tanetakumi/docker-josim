@@ -23,6 +23,7 @@ def get_optimize_data(data : str) -> tuple:
     sim_data = re.sub('\*+\s*optimize\s*\*+[\s\S]+$','', data)
     return (time1, time2, sim_data)
 
+
 def get_judge_spuid(data : str) -> list:
     squids = []
     # 改行が一回だけ、すなわち連続されて記述されている(.print phase <要素>)の部分を取得
@@ -70,30 +71,61 @@ def sim_default(time_tuple : tuple, sim_data : str, squid : list, vlist : list) 
         sim_data = sim_data.replace(v['text'], '{:.2f}'.format(v['def']))
     return judge.judge(time_tuple, simulation(sim_data), squid)
 
-def get_margin(time_tuple : tuple, sim_data : str, squid : list, vlist : list, def_frame : pd.DataFrame, char : str) -> pd.DataFrame:
-    
+def get_margins(time_tuple : tuple, sim_data : str, squid : list, vlist : list, def_frame : pd.DataFrame):
+    margins_list = []
     for v in vlist:
-        if v['char'] != char:
-            sim_data = sim_data.replace(v['text'], '{:.2f}'.format(v['def']))
-        else:
-            vtarg = v
-    pre_b = True
-    high_v = vtarg['def']
-    low_v = 0
-    for i in range(6):
+        tmp_sim_data = sim_data
+        for v2 in vlist:
+            if v == v2:
+                vtarg = v
+            else:
+                tmp_sim_data = tmp_sim_data.replace(v2['text'], '{:.2f}'.format(v2['def']))
+
+        # 変数の初期化=====
+        pre_b = True
+        high_v = vtarg['def']
+        low_v = 0
         tmp_v = (high_v + low_v)/2
-        sim_data_new = sim_data.replace(vtarg['text'], '{:.2f}'.format(tmp_v))
-        tmp_frame = judge.judge(time_tuple, simulation(sim_data_new), squid)
-        # print(tmp_frame)
-        pre_b = judge.compareDataframe(tmp_frame, def_frame)
-        if pre_b:
-            high_v = tmp_v
-        else:
-            low_v = tmp_v
 
-    return high_v
+        for i in range(6):
 
-    # return judge.judge(time_tuple, simulation(sim_data), squid)
+            tmp_frame = judge.judge(time_tuple, 
+                simulation(tmp_sim_data.replace(vtarg['text'], '{:.2f}'.format(tmp_v))), 
+                squid)
+            pre_b = judge.compareDataframe(tmp_frame, def_frame)
+            if pre_b:
+                high_v = tmp_v
+                tmp_v = (high_v + low_v)/2
+            else:
+                low_v = tmp_v
+                tmp_v = (high_v + low_v)/2
+        low_margin = high_v
+
+        # 変数の初期化=====
+        pre_b = True
+        high_v = 0
+        low_v = vtarg['def']
+        tmp_v = vtarg['def'] * 2
+
+        for i in range(6):
+            tmp_frame = judge.judge(time_tuple, 
+                simulation(tmp_sim_data.replace(vtarg['text'], '{:.2f}'.format(tmp_v))), 
+                squid)
+            pre_b = judge.compareDataframe(tmp_frame, def_frame)
+            if pre_b:
+                if high_v == 0:
+                    low_v = tmp_v
+                    tmp_v = tmp_v * 2
+                else:  
+                    low_v = tmp_v
+                    tmp_v = (high_v + low_v)/2
+            else:
+                high_v = tmp_v
+                tmp_v = (high_v + low_v)/2
+        high_margin = low_v
+        margins_list.append((v['char'], low_margin, high_margin))
+    return margins_list
+
 
 def optimize(filepath : str):
     if os.path.exists(filepath):
@@ -113,7 +145,7 @@ def optimize(filepath : str):
         def_frame = sim_default(time_tuple, sim_data, squids, vlist)
         print(def_frame)
 
-        get_margin(time_tuple, sim_data, squids, vlist, def_frame, "R2")
+        print(get_margins(time_tuple, sim_data, squids, vlist, def_frame))
         # simulation
         # print(judge.judge(simulation.simulation(sim_data), squids, (100e-12, 300e-12)))
     else:
