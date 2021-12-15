@@ -1,9 +1,10 @@
+from numpy import float64
 import pandas as pd
 import math
 import simulation
 import matplotlib.pyplot as plt
 
-def judge(time_tuple : tuple, data : pd.DataFrame, judge_squid : list) -> pd.DataFrame:
+def judge(time1 : float, time2 : float, data : pd.DataFrame, judge_squid : list) -> pd.DataFrame:
 
     p = math.pi
     p2 = math.pi * 2
@@ -16,12 +17,12 @@ def judge(time_tuple : tuple, data : pd.DataFrame, judge_squid : list) -> pd.Dat
     for column_name, srs in newDataframe.iteritems():
 
         # バイアスをかけた時の状態の位相(初期位相)
-        init_phase = srs[( srs.index > time_tuple[0] ) & ( srs.index < time_tuple[1] )].mean()
+        init_phase = srs[( srs.index > time1 ) & ( srs.index < time2 )].mean()
         # print(column_name," init phase = ",init_phase)
         judge_phase = init_phase + p
         
         # クロックが入ってからのものを抽出
-        srs = srs[srs.index > time_tuple[1]]
+        srs = srs[srs.index > time2]
 
         # 位相変数
         flag = 0
@@ -33,13 +34,14 @@ def judge(time_tuple : tuple, data : pd.DataFrame, judge_squid : list) -> pd.Dat
                 flag = flag - 1
                 resultframe = resultframe.append({'time':srs.index[i], 'element':column_name, 'phase':flag},ignore_index=True)
 
-    resultframe.sort_values('time',inplace=True)
-    resultframe.reset_index(drop=True,inplace=True)
+    # resultframe.sort_values('time',inplace=True)
+    # resultframe.reset_index(drop=True,inplace=True)
     return resultframe
 
 
 def compareDataframe(df1 : pd.DataFrame, df2 : pd.DataFrame) -> bool:
-    return df1.drop('time', axis=1).equals(df2.drop('time', axis=1))
+    return df1.sort_values(['phase', 'time']).drop('time', axis=1).reset_index(drop=True)\
+        .equals(df2.sort_values(['phase', 'time']).drop('time', axis=1).reset_index(drop=True))
 
 if __name__ == '__main__':
     """

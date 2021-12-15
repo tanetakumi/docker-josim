@@ -37,6 +37,6 @@ Vb                      100     0       pwl(0ps 0mV 100ps 1.0mV)
 
 **** optimize ****
 * バイアス電圧の立ち上がり終了の時間
-* EndTimeOfBiasRise=100ps
+* EndTimeOfBiasRise=100e-12
 * 初期パルスの入力開始時間
-* StartTimeOfPulseInput=200ps
+* StartTimeOfPulseInput=300e-12

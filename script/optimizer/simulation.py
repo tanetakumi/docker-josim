@@ -15,7 +15,7 @@ def simulation(simulation_data : str) -> pd.DataFrame:
 
     first_split = re.split('100%\s*Formatting\s*Output',result.stdout)
     if len(first_split) == 2:
-        split_data = first_split[1]  
+        split_data = first_split[1]
     else:
         print("--- standard error ---")
         print("\033[31m" + result.stderr + "\033[0m")
