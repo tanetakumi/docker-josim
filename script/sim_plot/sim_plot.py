@@ -24,7 +24,7 @@ def main():
                 raw = f.read()
             
             # print(re.findall('#.+\(.+\)',raw))
-            df = simulation(raw)
+            df = simulation.simulation(raw)
             print(df)
             df.plot()
             plt.show()

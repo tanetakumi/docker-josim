@@ -3,8 +3,10 @@ import pandas as pd
 import concurrent.futures
 from simulation import simulation
 from margin import margin
-import judge
+from judge import judge
 import data
+import re
+
 
 
 
@@ -12,7 +14,7 @@ def sim_default(data : dict) -> pd.DataFrame:
     sim_data = data['input']
     for v in data['variables']:
         sim_data = sim_data.replace(v['text'], '{:.2f}'.format(v['def']))
-    return judge.judge(data['time1'], data['time2'], simulation(sim_data), data['squids'])
+    return judge(data['time1'], data['time2'], simulation(sim_data), data['squids'])
 
     
 def get_margins(data : dict, def_df : pd.DataFrame):
@@ -42,9 +44,37 @@ def optimize(filepath : str):
         # simualtion default value
         def_value_dataframe = sim_default(main_data)
 
-        margin_list = get_margins(main_data, def_value_dataframe)
+        # vlist 
+        vlist = main_data['variables']
 
-        print(margin_list)
+        pre = None
+        while(True):
+            margin_list = get_margins(main_data, def_value_dataframe)
+            min_margin = 100
+            for m in margin_list:
+                print(m)
+                if abs(m['lower']) < min_margin:
+                    min_margin = abs(m['lower'])
+                    min_element = m
+                if m['upper'] < min_margin:
+                    min_margin = abs(m['upper'])
+                    min_element = m
+
+            vlist = main_data['variables']
+            for i in range(len(vlist)):
+                if vlist[i]['char'] == min_element['char']:
+                    vlist[i]['def'] = ( min_element['upper_value'] + min_element['lower_value'] )/2
+            main_data['variables'] = vlist
+
+            print("-----minimum margin:",min_element,"-----")
+            
+
+            pre_char = pre['char'] if pre is not None else None
+            print(pre_char, min_element['char'])
+            if pre_char == min_element['char']:
+                break;
+            else:
+                pre = min_element
 
     else:
         print("ファイルが存在しません。\n指定されたパス:"+filepath)
@@ -58,4 +88,4 @@ def main():
 
 
 if __name__ == '__main__':
-    optimize("/workspaces/docker-josim/files/hfqdff_lisan.inp")
+    optimize("/workspaces/docker-josim/files/dff.inp")

@@ -4,6 +4,7 @@ import pandas as pd
 import io
 import re
 import sys
+import matplotlib.pyplot as plt
 
 def check_lastline(data : str) -> str:
     return re.sub('\n*$','\n.end',data) if re.search('\.end\s*$', data) is None else data
@@ -28,4 +29,6 @@ if __name__ == "__main__":
     with open("/workspaces/docker-josim/test_netlist_file/backup.txt",'r') as f:
         raw = f.read()
     print(raw)
-    print(simulation(raw))
+    df = simulation(raw)
+    df.plot()
+    plt.show()

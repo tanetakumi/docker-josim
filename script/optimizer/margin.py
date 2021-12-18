@@ -1,5 +1,5 @@
 import judge
-from simulation import simulation
+import simulation
 import pandas as pd
 
 
@@ -18,7 +18,7 @@ def margin(data : dict, def_df : pd.DataFrame, target : dict):
 
     for i in range(6):
         tmp_df = judge.judge(data['time1'], data['time2'], 
-            simulation(sim_data.replace(target['text'], '{:.2f}'.format(tmp_v))), 
+            simulation.simulation(sim_data.replace(target['text'], '{:.2f}'.format(tmp_v))), 
             data['squids'])
         if judge.compareDataframe(tmp_df, def_df):
             high_v = tmp_v
@@ -36,7 +36,7 @@ def margin(data : dict, def_df : pd.DataFrame, target : dict):
 
     for i in range(6):
         tmp_df = judge.judge(data['time1'], data['time2'], 
-            simulation(sim_data.replace(target['text'], '{:.2f}'.format(tmp_v))), 
+            simulation.simulation(sim_data.replace(target['text'], '{:.2f}'.format(tmp_v))), 
             data['squids'])
         if judge.compareDataframe(tmp_df, def_df):
             if high_v == 0:
@@ -50,4 +50,7 @@ def margin(data : dict, def_df : pd.DataFrame, target : dict):
             tmp_v = (high_v + low_v)/2
     upper_margin = low_v
     
-    return {'char' : target['char'], 'lower': lower_margin, 'upper' : upper_margin}   
+    
+    return {'char' : target['char'], 'def': target['def'], 
+            'lower': round((lower_margin-target['def'])/target['def']*100,2), 'lower_value': lower_margin,
+            'upper' : round((upper_margin-target['def'])/target['def']*100,2), 'upper_value' : upper_margin}   
