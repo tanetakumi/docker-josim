@@ -1,3 +1,0 @@
-[console_scripts]
-simplot = simplot.__main__
-
