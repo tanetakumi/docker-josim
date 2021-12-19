@@ -1,11 +1,3 @@
-  
 {
-    "python.autoComplete.extraPaths": [
-        "/workspaces/docker-josim/cope"
-    ],
-    "python.pythonPath": "/bin/python3",
-    "python.analysis.extraPaths": [
-        "/workspaces/docker-josim/cope",
-        "/workspaces/docker-josim/test"
-    ]
+    "python.pythonPath": "/bin/python3"
 }

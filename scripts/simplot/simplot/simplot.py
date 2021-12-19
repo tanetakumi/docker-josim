@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import os
 import re
-from simulation import simulation
+from simplot.simulation import simulation
 import sys
 
 def remove_opt_symbol(sim_data : str) -> str:
