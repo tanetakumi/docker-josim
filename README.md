@@ -1,8 +1,10 @@
 # docker-josim
 
-This is a container for easy installation of josim and analysis of simulation results in python.
+This is a container that contains josim, python and other tools.
 
-JoSIM is able to recognize pi junctions.
+JoSIM is a SPICE syntax circuit simulator specifically created to handle superconducting elements such as the Josephson junction
+
+Now, circuits containing pi-junctions(ferromagnetic junctions) can also be simulated.
 
 [JoSIM](https://github.com/JoeyDelp/JoSIM)
 
@@ -21,16 +23,26 @@ JoSIM is able to recognize pi junctions.
 
     [Remote - Containers](https://code.visualstudio.com/docs/remote/containers)
 
+## Functions
+
+- josim
+- x11 forwarding
+- python
+- simulation and plot
+- optimize
+
 ## Command
 
-- if If you have the X11 client installed on your computer, you can easily view the simulation results in a graph by running this command.
+- Simulation and plot command
+
+    If you have the X11 client installed on your computer, you can easily view the simulation results in a graph by running this command.
     ```
-    sim-plot <filepath>
+    simplot <filepath>
     ```
 
 - Circuit Optimization Commands
 
     under development
     ```
-    optimize <filepath> <outputfilepath>
+    optimize <filepath>
     ```
