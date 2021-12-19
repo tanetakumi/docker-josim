@@ -2,9 +2,7 @@
 
 This is a container for easy installation of josim and analysis of simulation results in python.
 
-This JoSIM is able to recognize pi junctions.
-
-[Forked JoSIM (pJoSIM)](https://github.com/tanetakumi/JoSIM)
+JoSIM is able to recognize pi junctions.
 
 [JoSIM](https://github.com/JoeyDelp/JoSIM)
 
