@@ -31,6 +31,8 @@ Now, circuits containing pi-junctions(ferromagnetic junctions) can also be simul
     Select "Reopen in container".
     
     ![image](https://user-images.githubusercontent.com/75787495/146674076-fbd9f7ea-b333-428b-ad3e-62f2d246bbd6.png)
+    
+    Just wait a few minutes.
 
 
 ## Functions
