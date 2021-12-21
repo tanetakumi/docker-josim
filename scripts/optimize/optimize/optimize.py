@@ -6,6 +6,7 @@ from margin import margin
 from judge import judge
 import data
 import re
+from margin_plot import margin_plot
 
 
 
@@ -13,6 +14,7 @@ import re
 def sim_default(data : dict) -> pd.DataFrame:
     sim_data = data['input']
     for v in data['variables']:
+        print(v['text'])
         sim_data = sim_data.replace(v['text'], '{:.2f}'.format(v['def']))
     return judge(data['time1'], data['time2'], simulation(sim_data), data['squids'])
 
@@ -48,8 +50,9 @@ def optimize(filepath : str):
         vlist = main_data['variables']
 
         pre = None
-        while(True):
+        for i in range(7):
             margin_list = get_margins(main_data, def_value_dataframe)
+            margin_plot(pd.DataFrame(margin_list).set_index('char'), str(i))
             min_margin = 100
             for m in margin_list:
                 print(m)
@@ -63,15 +66,14 @@ def optimize(filepath : str):
             vlist = main_data['variables']
             for i in range(len(vlist)):
                 if vlist[i]['char'] == min_element['char']:
-                    vlist[i]['def'] = ( min_element['upper_value'] + min_element['lower_value'] )/2
+                    upper_margin = min_element['upper_value'] if min_element['upper'] < 100 else min_element['def'] * 2
+                    vlist[i]['def'] = ( upper_margin + min_element['lower_value'] )/2
             main_data['variables'] = vlist
 
             print("-----minimum margin:",min_element,"-----")
             
-
-            pre_char = pre['char'] if pre is not None else None
-            print(pre_char, min_element['char'])
-            if pre_char == min_element['char']:
+            
+            if pre!= None and pre['char'] == min_element['char']:
                 break;
             else:
                 pre = min_element

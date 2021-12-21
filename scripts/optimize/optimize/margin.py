@@ -16,7 +16,7 @@ def margin(data : dict, def_df : pd.DataFrame, target : dict):
     low_v = 0
     tmp_v = (high_v + low_v)/2
 
-    for i in range(6):
+    for i in range(7):
         tmp_df = judge.judge(data['time1'], data['time2'], 
             simulation.simulation(sim_data.replace(target['text'], '{:.2f}'.format(tmp_v))), 
             data['squids'])
@@ -34,7 +34,7 @@ def margin(data : dict, def_df : pd.DataFrame, target : dict):
     low_v = target['def']
     tmp_v = target['def'] * 2
 
-    for i in range(6):
+    for i in range(7):
         tmp_df = judge.judge(data['time1'], data['time2'], 
             simulation.simulation(sim_data.replace(target['text'], '{:.2f}'.format(tmp_v))), 
             data['squids'])

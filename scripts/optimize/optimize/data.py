@@ -6,7 +6,7 @@ import util
 # 先頭の文字列、Line
 def get_variable(text : str) -> list:
     vlist = []
-    for l in re.findall('#.+\(.+\)', text):
+    for l in re.findall('#.+\([\d\.]+\)', text):
         a = re.split('\(', re.sub('#|\)','',l) )
         vlist.append({'char': a[0], 'text': l, 'def': util.stringToNum(a[1])})
     vlist_result = []
