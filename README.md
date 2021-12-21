@@ -10,7 +10,7 @@ Now, circuits containing pi-junctions(ferromagnetic junctions) can also be simul
 
 ## Installation
 
-1.  install Docker.  [Docker](https://www.docker.com/)
+1.  install Docker.  　[Docker](https://www.docker.com/)
 
 2.  Clone this repository or download it as a zip file
     ```
@@ -19,9 +19,21 @@ Now, circuits containing pi-junctions(ferromagnetic junctions) can also be simul
 
 3.  Build a container from the Dockerfile. (.devcontainer/Dockerfile)
     
-    For easy installation, you can install "Remote - Containers" from the VScode extension, open the folder where you downloaded this repository, and open it from "Reopen in Container".
+    For easy installation, I recommend you to use VScode.
+    
+    First, please install Remote- Containers[Remote - Containers](https://code.visualstudio.com/docs/remote/containers) from VScode extensions.
+    ![image](https://user-images.githubusercontent.com/75787495/146673520-c86cc686-21ef-4cdd-a06e-8edb493877ce.png)
+    
+    Open the folder where you have downloaded this repository and click on the green button on the bottom left.
+    
+    ![image](https://user-images.githubusercontent.com/75787495/146674126-021c88c3-8ce1-4b29-b6b6-87ce5271460e.png)
 
-    [Remote - Containers](https://code.visualstudio.com/docs/remote/containers)
+    Select "Reopen in container".
+    
+    ![image](https://user-images.githubusercontent.com/75787495/146674076-fbd9f7ea-b333-428b-ad3e-62f2d246bbd6.png)
+    
+    Just wait a few minutes.
+
 
 ## Functions
 
