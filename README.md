@@ -10,7 +10,7 @@ Now, circuits containing pi-junctions(ferromagnetic junctions) can also be simul
 
 ## Installation
 
-1.  install Docker.  　[Docker](https://www.docker.com/)
+1.  install Docker.   [Docker](https://www.docker.com/)
 
 2.  Clone this repository or download it as a zip file
     ```

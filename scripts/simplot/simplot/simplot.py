@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import os
 import re
-from simplot.simulation import simulation
+from .simulation import simulation
 import sys
 
 def remove_opt_symbol(sim_data : str) -> str:
@@ -14,7 +14,7 @@ def remove_opt_symbol(sim_data : str) -> str:
     
     return sim_data
 
-def simulation_plot(filepath : str):
+def simulation_plot(filepath : str, savepath : str = None):
     if os.path.exists(filepath):
         # 読み込み
         with open(filepath, 'r') as f:
@@ -22,15 +22,19 @@ def simulation_plot(filepath : str):
         sim_data = remove_opt_symbol(raw)
         df = simulation(sim_data)
         df.plot()
-        plt.show()
+        if filepath == None:
+            plt.show()
+        else:
+            plt.savefig(savepath)
     else:
         print("ファイルが存在しません。\n指定されたパス:"+filepath,file=sys.stderr)
         sys.exit(1)
 
 def main():
-    
     if len(sys.argv) == 2:
         simulation_plot(sys.argv[1])
+    elif len(sys.argv) == 3:
+        simulation_plot(sys.argv[1],sys.argv[2])
     else:
         print("引数が足りません。\n入力された引数:"+str(len(sys.argv)),file=sys.stderr) 
         sys.exit(1)

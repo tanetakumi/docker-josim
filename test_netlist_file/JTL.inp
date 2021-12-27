@@ -10,8 +10,9 @@ B2                 4         5   pjjmod area=0.5
 R2                 4         5   15.88ohm
 .ends
 
+
 * Example JTL Basic
-VIN        1          0         pwl(0 0 300p 0 301p 0.5175mV 302p 0.5175mV 303p 0  400p 0 401p 0.5175mV 402p 0.5175mV 403p 0  500p 0 501p 0.5175mV 502p 0.5175mV 503p 0)
+VIN        1          0         pwl(0 0  1000p 0 1001p 0.5175mV 1002p 0.5175mV 1003p 0)
 X1        psquid       1       0
 L1                      1       2       18pH
 R1                      2       100     50ohm
@@ -24,9 +25,9 @@ X3        psquid       5       0
 
 R3                      5       6       8.32ohm
 L5                      6       0       2pH
-Vb                      100     0       pwl(0ps 0mV 100ps 1.0mV)
+Vb                      100     0       pwl(0ps 0mV 100ps 0.0001mV)
 
-.tran 0.25p 1000p 0 0.25p
+.tran 0.25p 100p 0 0.25p
 .print PHASE B1|X2
 .print PHASE B2|X2
 
