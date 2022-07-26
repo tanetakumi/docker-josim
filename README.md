@@ -34,6 +34,7 @@ Now, circuits containing pi-junctions(ferromagnetic junctions) can also be simul
     
     Just wait a few minutes.
 
+Dockerを使ってシュミレータ開発を行いたい。
 
 ## Functions
 

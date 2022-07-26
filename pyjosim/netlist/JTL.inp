@@ -1,0 +1,37 @@
+.model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.064pF, R0=100ohm, Rn=16ohm, Icrit=0.1mA)
+.model pjjmod jj(Rtype=1, Vg=2.8mV, Cap=0.064pF, R0=100ohm, Rn=16ohm, Icrit=0.1mA, PHI=PI)
+
+.subckt psquid        3  5 
+L1                 3         1   1.75pH fcheck
+L2                 3         4   1.75pH fcheck
+B1                 1         5   jjmod area=0.5
+R1                 1         5   15.88ohm
+B2                 4         5   pjjmod area=0.5
+R2                 4         5   15.88ohm
+.ends
+
+
+* Example JTL Basic
+VIN        1          0         pwl(0 0  1000p 0 1001p 0.5175mV 1002p 0.5175mV 1003p 0)
+X1        psquid       1       0
+L1                      1       2       18pH
+R1                      2       100     50ohm
+L2                      2       3       18pH
+X2        psquid       3       0      
+L3                      3       4       18pH
+R2                      4       100     50ohm
+L4                      4       5       18pH
+X3        psquid       5       0       
+
+R3                      5       6       8.32ohm
+L5                      6       0       2pH
+Vb                      100     0       pwl(0ps 0mV 100ps 0.0001mV)
+
+.tran 0.25p 100p 0 0.25p
+.print PHASE B1|X2
+.print PHASE B2|X2
+
+.print PHASE B1|X3
+.print PHASE B2|X3
+
+.end
