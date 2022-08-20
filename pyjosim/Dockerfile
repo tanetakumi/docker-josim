@@ -6,7 +6,6 @@ LABEL maintainer="tanetakumi"
 ENV SHELL /bin/bash
 
 WORKDIR /code
-COPY requirements.txt /code
 
 RUN apt-get update
 
