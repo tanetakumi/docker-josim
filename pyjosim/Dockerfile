@@ -7,11 +7,12 @@ ENV SHELL /bin/bash
 
 WORKDIR /code
 
-RUN apt-get update
+RUN apt update
 
-RUN apt-get -y install build-essential\
+RUN apt -y install build-essential\
     && apt -y install git\
-    && apt-get -y install python3-tk
+    && apt -y install less\
+    && apt -y install python3-tk
 
 
 
@@ -30,7 +31,7 @@ RUN pip install --upgrade pip
 
 # hfq-optimizer
 RUN set -ex\
-    && git clone "https://github.com/tanetakumi/hfq-optimizer"\
+    && git clone -b v1.1 "https://github.com/tanetakumi/hfq-optimizer"\
     && pip install -r hfq-optimizer/requirements.txt\
     && pip install -e hfq-optimizer/scripts/optimize
 
