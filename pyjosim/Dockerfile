@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM python:3.9-slim-buster
 
 LABEL maintainer="tanetakumi"
 
@@ -7,18 +7,14 @@ ENV SHELL /bin/bash
 
 WORKDIR /code
 
-RUN apt update
-
-RUN apt -y install build-essential\
-    && apt -y install git\
-    && apt -y install less\
-    && apt -y install python3-tk
-
-
-
-# set -ex コマンドの実行に失敗したらその場で終了する
-# josim installation
+# install essential packages
 RUN set -ex\
+    && apt-get update\
+    && apt-get -y install build-essential git less python3-tk
+
+# install josim
+RUN set -ex\
+    && pip install --upgrade pip\
     && pip install cmake\
     && git clone "https://github.com/JoeyDelp/JoSIM"\
     && cd JoSIM && mkdir build && cd build\
@@ -26,12 +22,11 @@ RUN set -ex\
     && cmake --build . --config Release\
     && make install
 
-WORKDIR /root
-RUN pip install --upgrade pip
+# install hfq-optimizer
 
-# hfq-optimizer
+WORKDIR /root
+
 RUN set -ex\
     && git clone -b v1.1 "https://github.com/tanetakumi/hfq-optimizer"\
     && pip install -r hfq-optimizer/requirements.txt\
     && pip install -e hfq-optimizer/scripts/optimize
-
