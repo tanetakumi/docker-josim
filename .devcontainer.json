@@ -3,14 +3,14 @@
 {
 	"name": "pyjosim", // コンテナ表示名
 	"dockerComposeFile": "./docker-compose.yml", // Docker Composeのファイルパス
-	"workspaceFolder": "/pyjosim",
-	"service": "dev", // Docker Composeの接続サービス名
+	"workspaceFolder": "/src",
+	"service": "pyjosim", // Docker Composeの接続サービス名
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-python.python",
 		"ms-toolsai.jupyter",
 		"ms-toolsai.jupyter-renderers",
-		"ms-python.vscode-pylance",
-		"ms-toolsai.jupyter-keymap"
+		"ms-toolsai.jupyter-keymap",
+		"ms-python.vscode-pylance"
 	]
 }

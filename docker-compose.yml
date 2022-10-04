@@ -1,10 +1,10 @@
 version: '3'
 services:
   pyjosim:
-    build: ./pyjosim
+    build: .
     container_name: pyjosim
     volumes:
-      - ./pyjosim/netlist:/root/netlist
+      - ./data:/src/data
     # コンテナ内で開発するから落とさない
     tty: true
     stdin_open: true

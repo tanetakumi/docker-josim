@@ -1,6 +1,7 @@
 #! /bin/bash
 
-# docker-compose version
+# docker-compose version 
+# https://github.com/docker/compose/releases
 DOCKER_COMPOSE_VERSION="v2.6.1"
 
 
@@ -10,23 +11,23 @@ if [ "`whoami`" != "root" ]; then
   exit 1
 fi
 
-sudo apt-get update
-sudo apt-get install -y \
+apt-get update
+apt-get install -y \
     ca-certificates \
     curl \
     gnupg \
     lsb-release
 
 # Docker-install
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+apt-get update
+apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 # Docker-compose install
-sudo curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
