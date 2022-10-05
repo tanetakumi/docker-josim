@@ -7,10 +7,13 @@
 	"service": "pyjosim", // Docker Composeの接続サービス名
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
+		"ms-python.vscode-pylance",
 		"ms-python.python",
 		"ms-toolsai.jupyter",
 		"ms-toolsai.jupyter-renderers",
-		"ms-toolsai.jupyter-keymap",
-		"ms-python.vscode-pylance"
-	]
+		"ms-toolsai.jupyter-keymap"
+	],
+	"settings": {
+		"python.languageServer": "Pylance"
+	}
 }
